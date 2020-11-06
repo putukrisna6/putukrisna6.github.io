@@ -59,13 +59,6 @@
   }
 }
 
-@media (max-width: 576px) {
-  .animated-text {
-    transform: scale(0.3);
-    white-space: nowrap;
-  }
-}
-
 .noSelect {
   pointer-events: none;
 }

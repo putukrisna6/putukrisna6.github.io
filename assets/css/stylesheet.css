@@ -5,3 +5,20 @@
   }
 }
 
+.text-nowrap.d-flex.justify-content-center.align-items-center.animated-text.noSelect {
+  color: white;
+  background: rgba(255,255,255,0);
+  border-style: none;
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.blc {
+  font-weight: lighter;
+}
+
+.bg-light {
+  background-color: #f8f9fa!important;
+}
+
