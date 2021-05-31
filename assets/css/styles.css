@@ -1,0 +1,28 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.blue-span {
+  color: #6DD5FA;
+}
+
+.card-header {
+  background: #2980B9;
+}
+
+.nav-link {
+  color: #6DD5FA;
+}
+
+a:hover, a:focus {
+  color: #6DD5FA;
+}
+
+.card-heading {
+  color: black;
+}
+
+.card-text {
+  color: gray;
+}
+
