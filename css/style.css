@@ -456,3 +456,7 @@ figcaption {
 .all.active, .laravel.active, .java.active, .other.active, .php.active {
 	font-weight: bold!important;
 }
+
+h3 {
+	font-size: 26px;
+}
