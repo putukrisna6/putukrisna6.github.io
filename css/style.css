@@ -1,8 +1,3 @@
-/*
-Verticard Template
-https://templatemo.com/tm-533-verticard
-*/
-
 body {
   font-family: 'Poppins', sans-serif;
   font-size: 18px;
@@ -437,4 +432,27 @@ figcaption {
 .span-blue {
 	color: #219ebc;
 	font-weight: bold;
+}
+
+.pr-stack {
+	padding: 6px;
+	font-weight: bold;
+	color: white;
+	font-size: x-large;
+	background-color: #0099CC;
+	border-radius: 20%;
+	transition: all 0.3s ease;
+	margin-right: 1rem;
+}
+
+.pr-stack:hover {
+	transform: scale(1.05);
+}
+
+#filter li a {
+	color:black!important;
+}
+
+.all.active, .laravel.active, .java.active, .other.active, .php.active {
+	font-weight: bold!important;
 }
