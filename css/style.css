@@ -460,3 +460,17 @@ figcaption {
 h3 {
 	font-size: 26px;
 }
+
+.project-link {
+	font-style: normal; 
+	text-decoration: underline; 
+	color: #219ebc;
+}
+
+.img-hoverable {
+	transition: transform .7s ease-in-out;
+}
+
+.img-hoverable:hover {
+	transform: scale(1.05);
+}
