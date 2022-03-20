@@ -57,21 +57,33 @@
           <div class="tm-content tm-content-2">
             <div class="container-fluid">
               <h2 class="tm-page-title mb-3">
-                REST API with Go | All Receipts
+                REST API with Go | Create Receipts
               </h2>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="getAllReceipts"></tbody>
-              </table>
+              <form method="POST">
+                <div class="form-group">
+                  <label for="amount">Amount</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="amount"
+                    aria-describedby="amount"
+                    placeholder="Enter amount"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="total">Total</label>
+                  <input
+                    type="number"
+                    step="0.01"
+                    class="form-control"
+                    id="total"
+                    placeholder="Enter total"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
 
-              <button class="btn btn-info"><a href="../create" class="text-white">Create</a></button>
+              <p class="span-yellow font-italic"></p>
               <hr />
             </div>
           </div>
@@ -107,30 +119,26 @@
 
     <script src="/js/main.js"></script>
     <script type="text/javascript">
-      $.ajax({
-        url: "https://simple-rest-go.herokuapp.com/api/receipts/all",
-        dataType: "json",
-        success: function (data) {
-          let resp = data.data;
+      $(document).ready(function () {
+        $("form").on("submit", function (event) {
+          event.preventDefault();
 
-          for (let i = 0; i < resp.length; i++) {
-            let row = $(
-              "<tr><th>" +
-                resp[i].id +
-                "</th><td>" +
-                resp[i].amount +
-                "</td><td>" +
-                resp[i].total +
-                "</td><td><a style=\"color: #219ebc;\" href=\"../show/" + 
-                resp[i].id + 
-                "\">Show</a></td></tr>"
-            );
-            $("#getAllReceipts").append(row);
-          }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-          alert("Error: " + textStatus + " - " + errorThrown);
-        },
+          var formData = {
+            amount: $("#amount").val(),
+            total: $("#total").val()
+          };
+
+          $.ajax({
+            type: "POST",
+            url: "https://simple-rest-go.herokuapp.com/api/receipts",
+            data: formData,
+            dataType: "json",
+            success: function (resultData) {
+              alert("Save Complete");
+              window.location.href = "../all"
+            },
+          });
+        });
       });
     </script>
   </body>
