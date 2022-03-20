@@ -57,21 +57,20 @@
           <div class="tm-content tm-content-2">
             <div class="container-fluid">
               <h2 class="tm-page-title mb-3">
-                REST API with Go | All Receipts
+                REST API with Go | Show Receipt <span class="font-weight-bold" id="title"></span>
               </h2>
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Amount</th>
-                    <th scope="col">Total</th>
-                    <th scope="col">Actions</th>
-                  </tr>
-                </thead>
-                <tbody id="getAllReceipts"></tbody>
-              </table>
+              <p class="span-yellow font-italic mb-0">
+                Receipt details 
+              </p>
+              <ul>
+                <li>Amount: <span id="amount"></span></li>
+                <li>Total: <span id="total"></span></li>
+                <li>Created at <span id="createdAt"></span></li>
+                <li>Updated at <span id="updatedAt"></span></li>
+              </ul>
 
-              <button class="btn btn-info"><a href="../create" class="text-white">Create</a></button>
+              <span><button class="btn btn-info"><a href="../all" class="text-white">Back</a></button></span>
+              <span><button class="btn btn-danger"><a onclick="deleteReceipt(params.get('id'))" class="text-white">Delete</a></button></span>
               <hr />
             </div>
           </div>
@@ -107,24 +106,19 @@
 
     <script src="/js/main.js"></script>
     <script type="text/javascript">
+      var params = new URLSearchParams(location.search);
+
       $.ajax({
-        url: "https://simple-rest-go.herokuapp.com/api/receipts/all",
+        url: "https://simple-rest-go.herokuapp.com/api/receipts/" + params.get('id'),
         dataType: "json",
         success: function (data) {
           let resp = data.data;
 
-          for (let i = 0; i < resp.length; i++) {
-            let row = $(
-              "<tr><th>" +
-                (i+1) +
-                "</th><td>" +
-                resp[i].amount +
-                "</td><td>" +
-                resp[i].total +
-                "</td><td><button type=\"button\" class=\"btn btn-secondary\" onclick=\"showReceipts(" + resp[i].id + ")\">Show</button></td></tr>"
-            );
-            $("#getAllReceipts").append(row);
-          }
+          document.getElementById("title").innerHTML = "#" + resp.id;
+          document.getElementById("amount").innerHTML = resp.amount + " items";
+          document.getElementById("total").innerHTML = "$" + resp.total;
+          document.getElementById("createdAt").innerHTML = $.format.date(resp.createdAt, "HH:mm:ss, dd MMMM yyyy");
+          document.getElementById("updatedAt").innerHTML = $.format.date(resp.updatedAt, "HH:mm:ss, dd MMMM yyyy");
         },
         error: function (jqXHR, textStatus, errorThrown) {
           alert("Error: " + textStatus + " - " + errorThrown);
@@ -132,8 +126,15 @@
       });
     </script>
     <script>
-      function showReceipts(id) {
-        window.location.href = "../show/index.html" + "?id=" + id;
+      function deleteReceipt(id) {
+        $.ajax({
+          type: "DELETE",
+          url: "https://simple-rest-go.herokuapp.com/api/receipts/" + id,
+          success: function (resultData) {
+            alert("Delete Complete");
+            window.location.href = "../all"
+          },
+        });
       }
     </script>
   </body>
